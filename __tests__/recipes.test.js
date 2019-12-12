@@ -105,9 +105,11 @@ describe('recipe routes', () => {
   });
 
   it('gets a recipe by id', async() => {
+
     return request(app)
       .get(`/api/v1/recipes/${recipe._id}`)
       .then(res => {
+        console.log(recipe.events);
         expect(res.body).toEqual({
           _id: expect.any(String),
           name: 'cookies',
