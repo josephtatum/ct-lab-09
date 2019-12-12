@@ -86,16 +86,16 @@ describe('recipe routes', () => {
   });
 
   it('gets all recipes', async() => {
-    const recipes = await Recipe.create([
-      { name: 'cookies', directions: [] },
-      { name: 'cake', directions: [] },
-      { name: 'pie', directions: [] }
-    ]);
+    // const recipes = await Recipe.create([
+    //   { name: 'cookies', directions: [], ingredients: [] },
+    //   { name: 'cake', directions: [], ingredients: [] },
+    //   { name: 'pie', directions: [], ingredients: [] }
+    // ]);
 
     return request(app)
       .get('/api/v1/recipes')
       .then(res => {
-        recipes.forEach(recipe => {
+        res.body.forEach(recipe => {
           expect(res.body).toContainEqual({
             _id: recipe._id.toString(),
             name: recipe.name
@@ -109,7 +109,6 @@ describe('recipe routes', () => {
     return request(app)
       .get(`/api/v1/recipes/${recipe._id}`)
       .then(res => {
-        console.log(recipe.events);
         expect(res.body).toEqual({
           _id: expect.any(String),
           name: 'cookies',
@@ -123,6 +122,7 @@ describe('recipe routes', () => {
             'bake for 10 minutes'
           ],
           events: JSON.parse(JSON.stringify(events)),
+          
           __v: 0
         });
       });
