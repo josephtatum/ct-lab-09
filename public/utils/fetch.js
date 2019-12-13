@@ -1,3 +1,8 @@
-const response = await fetch('http://example.com/movies.json');
-const myJson = await response.json();
-console.log(JSON.stringify(myJson));
+const URL = 'https://secure-brook-84158.herokuapp.comnpm';
+
+const getRecipes = async() => {
+  const response = await fetch(`${URL}/api/v1/recipes`);
+  console.log(response);
+};
+
+getRecipes();
